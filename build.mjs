@@ -45,27 +45,41 @@ const people = raw.map(p => {
   const working = Boolean(p.placement) || p.employedSelfReported;
   const status = p.placement
     ? p.placement.label + (p.placement.org ? ', ' + p.placement.org : '')
-    : p.employedSelfReported ? 'Currently employed' : 'Open to opportunities';
-  // Most stories open with "My success story is about...", so cards start from the second sentence.
-  const sentences = p.story.match(/[^.!?]+[.!?]+/g) || [];
-  const excerpt = (/^my (success )?story/i.test(p.story) && sentences.length > 1 ? sentences.slice(1).join('') : p.story).trim()
+    : p.employedSelfReported ? 'Employed, open to offers' : 'Open to opportunities';
+  // Most stories open with "My success story is about...": drop only that lead-in, keep their words.
+  const lead = p.story.replace(/^my (success )?story is (about |that )?/i, '');
+  const excerpt = (lead.charAt(0).toUpperCase() + lead.slice(1)).trim()
     || `${first(p.name)} is a ${track.label} trainee in the HPF Skills Development Program.`;
   return { ...p, photo: p.photo ? v(p.photo) : "", contact: contacts[p.id], trackInfo: track, working, status, excerpt, initials: initials(p.name) };
 }).sort((a, b) => Boolean(b.photo) - Boolean(a.photo) || a.name.localeCompare(b.name));
+
+// Cards lead with the skills that set a trainee apart, not the ones everyone in the track shares.
+const baseline = {};
+for (const t of Object.keys(site.tracks)) {
+  const inTrack = people.filter(p => p.track === t);
+  baseline[t] = inTrack.length ? inTrack[0].skills.filter(s => inTrack.every(p => p.skills.includes(s))) : [];
+}
+people.forEach(p => {
+  const extra = p.skills.filter(s => !baseline[p.track].includes(s));
+  p.cardSkills = [...extra, ...p.skills.filter(s => !extra.includes(s))].slice(0, 3);
+});
+const graduation = site.timeline.find(t => /graduation/i.test(t.title));
 
 // Skills sorted by how many trainees list them, for the filter.
 const skillCount = {};
 people.forEach(p => p.skills.forEach(s => { skillCount[s] = (skillCount[s] || 0) + 1; }));
 const allSkills = Object.keys(skillCount).sort((a, b) => skillCount[b] - skillCount[a] || a.localeCompare(b));
 
-const photoHtml = (p, root, eager = false) => p.photo
-  ? `<img src="${root}${esc(p.photo)}" alt="Portrait of ${esc(p.name)}" width="560" height="720" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`
-  : `<div class="initials" role="img" aria-label="${esc(p.name)}">${esc(p.initials)}</div>`;
+// On cards the name sits right below the photo, so the image is decorative there.
+const photoHtml = (p, root, eager = false, decorative = false) => p.photo
+  ? `<img src="${root}${esc(p.photo)}" alt="${decorative ? '' : `Portrait of ${esc(p.name)}`}" width="560" height="720" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`
+  : `<div class="initials" ${decorative ? 'aria-hidden="true"' : `role="img" aria-label="${esc(p.name)}"`}>${esc(p.initials)}</div>`;
 
 const head = ({ title, desc, root, pathName, image, jsonld }) => `<!doctype html>
-<html lang="en" data-root="${root}">
+<html lang="en" class="no-js" data-root="${root}">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.classList.replace('no-js', 'js')</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(desc)}">
@@ -79,7 +93,8 @@ ${URL_BASE ? `<meta property="og:url" content="${URL_BASE}${pathName}">\n<meta p
 <link rel="icon" href="${root}assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap"></noscript>
 <link rel="stylesheet" href="${root}style.css?v=${v('src/style.css').split('=')[1]}">
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, '\\u003c')}</script>` : ''}
 </head>
@@ -97,15 +112,15 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld).replace(
       <a href="${root}#journey">Journey</a>
       <a href="${root}#recruiters">For recruiters</a>
     </nav>
-    <button class="btn btn-soft btn-sm shortlist-btn" type="button" data-open-shortlist>${icon.list} Shortlist <span class="count" data-n="0">0</span></button>
+    <button class="btn btn-soft btn-sm shortlist-btn" type="button" data-open-shortlist aria-haspopup="dialog" aria-controls="drawer" aria-expanded="false">${icon.list} Shortlist <span class="count" data-n="0">0</span><span class="sr"> saved</span></button>
   </div>
 </header>`;
 
-const foot = root => `
+const foot = (root, isIndex = false) => `
 <footer class="foot">
   <div class="wrap">
     <div><span class="tagline">When skills meet the people who need them. That's human practice.</span><br>${esc(site.programme)} · ${esc(site.cohort)} · Delivered with Power Learn Project Africa</div>
-    <div>© ${new Date().getFullYear()} Human Practice Foundation Kenya</div>
+    <div>${site.contactEmail ? `Hiring or investing? <a href="mailto:${esc(site.contactEmail)}?subject=${encodeURIComponent('HPF Talent Hub enquiry')}">Email the HPF team</a><br>` : ''}© ${new Date().getFullYear()} Human Practice Foundation Kenya</div>
   </div>
 </footer>
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="sl-title">
@@ -117,37 +132,40 @@ const foot = root => `
     <div class="drawer-actions" id="sl-actions" hidden>
       <button class="btn btn-primary btn-sm" type="button" id="sl-copy">Copy list</button>
       <button class="btn btn-ghost btn-sm" type="button" id="sl-email">Email list</button>
+      ${site.contactEmail ? `<button class="btn btn-soft btn-sm" type="button" id="sl-intro" data-to="${esc(site.contactEmail)}">Ask HPF to introduce us</button>` : ''}
     </div>
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script id="people-data" type="application/json">${JSON.stringify(people.map(p => ({
   id: p.id, name: p.name, track: p.track, trackShort: p.trackInfo.short, photo: p.photo, initials: p.initials,
-  working: p.working, skills: p.skills,
-  search: [p.name, p.trackInfo.label, p.status, p.interest, ...p.skills, p.story].join(' ').toLowerCase(),
+  working: p.working, skills: p.skills, status: p.status,
+  // Search text is only needed where the directory is.
+  ...(isIndex ? { search: [p.name, p.trackInfo.label, p.status, p.interest, ...p.skills, p.story].join(' ').toLowerCase() } : {}),
 }))).replace(/</g, '\\u003c')}</script>
 <script src="${root}app.js?v=${v('src/app.js').split('=')[1]}" defer></script>
 </body>
 </html>`;
 
-const starBtn = p => `<button class="star" type="button" data-id="${p.id}" aria-pressed="false" aria-label="Shortlist ${esc(p.name)}">${icon.star}<span>Shortlist</span></button>`;
+// The visible label stays in the accessible name ("Shortlist" or "Shortlisted", then the person).
+const starBtn = p => `<button class="star" type="button" data-id="${p.id}" aria-pressed="false">${icon.star}<span class="star-label">Shortlist</span><span class="sr"> ${esc(p.name)}</span></button>`;
 
 const card = p => `
 <article class="card" data-id="${p.id}">
-  <div class="card-photo">${photoHtml(p, '')}</div>
+  <div class="card-photo">${photoHtml(p, '', false, true)}</div>
   <div class="card-body">
     <span class="track track-${p.track}">${esc(p.trackInfo.short)}</span>
     <h3><a href="t/${p.id}/">${esc(p.name)}</a></h3>
     <span class="status${p.working ? ' working' : ''}">${esc(p.status)}</span>
     <p class="card-excerpt">${esc(p.excerpt)}</p>
-    <ul class="chips">${p.skills.slice(0, 3).map(s => `<li>${esc(s)}</li>`).join('')}</ul>
+    <ul class="chips">${p.cardSkills.map(s => `<li>${esc(s)}</li>`).join('')}</ul>
     <div class="card-foot"><span class="view-link">View profile</span>${starBtn(p)}</div>
   </div>
 </article>`;
 
 const timeline = () => `<ol class="tl">${site.timeline.map(t => `
   <li data-start="${t.start}" data-end="${t.end}">
-    <span class="when">${esc(t.when)}</span><span class="now-tag">Now</span>
+    <span class="when">${esc(t.when)}</span><span class="now-tag">Now</span><span class="next-tag">Up next</span>
     <h3>${esc(t.title)}</h3>
     <p>${esc(t.text)}</p>
   </li>`).join('')}</ol>`;
@@ -171,8 +189,9 @@ const indexHtml = head({
     <div class="wrap hero-inner">
       <p class="hero-kicker">${esc(site.programme)} · ${esc(site.cohort)}</p>
       <h1 id="hero-title">Hire talent that already <span>builds for real needs.</span></h1>
-      <p class="hero-hook"><span class="hook-pre">From the Maasai Mara:</span> <span class="hook" id="hook" aria-hidden="true">${esc(site.hooks[0])}</span><span class="sr">${esc(site.hooks[0])}</span></p>
-      <p class="hero-lead">Meet ${people.length} young developers and data analysts. See each person's story, skills and work since day one, then contact them directly.</p>
+      <p class="hero-hook"><span class="hook-pre">From the Maasai Mara:</span> <span class="hook" id="hook" aria-hidden="true">${esc(site.hooks[0])}</span><span class="sr">${site.hooks.map(esc).join(' ')}</span></p>
+      <button class="hook-toggle" type="button" id="hook-toggle" aria-label="Pause rotating highlights" hidden>Pause</button>
+      <p class="hero-lead">Meet ${people.length} young developers and data analysts graduating on ${esc(graduation.when)} 2026. See each person's story and skills, then contact them directly.</p>
       <div class="hero-cta">
         <a class="btn btn-light" href="#trainees">Meet the trainees</a>
         <a class="btn btn-outline-light" href="#work">See what they built</a>
@@ -182,7 +201,9 @@ const indexHtml = head({
     <script id="hooks-data" type="application/json">${JSON.stringify(site.hooks).replace(/</g, '\\u003c')}</script>
   </section>
   <div class="wrap">
-    <div class="stats">${site.stats.map(s => `<div class="stat"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join('')}</div>
+    <div class="stats">${site.stats.map(s => s.href
+      ? `<a class="stat" href="${esc(s.href)}"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></a>`
+      : `<div class="stat"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join('')}</div>
   </div>
 
   <section class="dir" id="trainees">
@@ -203,10 +224,10 @@ const indexHtml = head({
         </div>
         <div class="seg" role="group" aria-label="Availability">
           <button type="button" data-avail="all" aria-pressed="true">Anyone</button>
-          <button type="button" data-avail="open" aria-pressed="false">Open to work</button>
-          <button type="button" data-avail="working" aria-pressed="false">Working</button>
+          <button type="button" data-avail="open" aria-pressed="false">Not yet working</button>
+          <button type="button" data-avail="working" aria-pressed="false">Already working</button>
         </div>
-        <label><span class="sr">Filter by skill</span><select id="skill" class="select"><option value="">Any skill</option>${allSkills.map(s => `<option>${esc(s)}</option>`).join('')}</select></label>
+        <label><span class="sr">Filter by skill</span><select id="skill" class="select"><option value="">Any skill</option>${allSkills.map(s => `<option value="${esc(s)}">${esc(s)} (${skillCount[s]})</option>`).join('')}</select></label>
       </div>
       <p class="result-line" id="result-line" aria-live="polite">Showing all ${people.length} trainees</p>
       <div class="grid" id="grid">${people.map(card).join('')}</div>
@@ -229,7 +250,7 @@ const indexHtml = head({
         </article>`).join('')}
       </div>
       <div class="photo-strip">
-        <figure><img src="${v('assets/img/winners-1.webp')}" alt="The Mara Smart Tracker team holding their prize cheque at the HPF x PLP Hackathon" loading="lazy" width="1600" height="911"><figcaption><b>2nd place, with the cheque to prove it.</b> The Mara Smart Tracker team, 11 September 2026.</figcaption></figure>
+        <figure><img src="${v('assets/img/winners-1.webp')}" alt="The Mara Smart Herd Tracker team holding their prize cheque at the HPF x PLP Hackathon" loading="lazy" width="1600" height="911"><figcaption><b>2nd place, with the cheque to prove it.</b> The Mara Smart Herd Tracker team, 11 September 2026.</figcaption></figure>
         <figure><img src="${v('assets/img/demo.webp')}" alt="A trainee presenting a platform on screen at the hackathon" loading="lazy" width="1600" height="900"><figcaption><b>Every team pitched a working app.</b> Demo day at the hackathon.</figcaption></figure>
         <figure><img src="${v('assets/img/community-2.webp')}" alt="Parents, elders and local leaders watching the pitches" loading="lazy" width="1600" height="900"><figcaption><b>The whole community came to watch.</b> Parents, elders and leaders at Community Day.</figcaption></figure>
       </div>
@@ -257,7 +278,7 @@ const indexHtml = head({
         <div>
           <p class="eyebrow" style="color:var(--lav)">For recruiters and investors</p>
           <h2>Find your next hire in three steps</h2>
-          <p>Graduation is on 26 November 2026, and capstone projects are presented the week before. Start a conversation now.</p>
+          <p>Capstone projects are presented at Demo Day, 20 to 26 November, and Cohort 1 graduates on 26 November 2026. Start a conversation now.</p>
           ${site.contactEmail ? `<a class="btn btn-primary" href="mailto:${esc(site.contactEmail)}?subject=${encodeURIComponent('HPF Talent Hub enquiry')}">Talk to the HPF team</a>` : `<a class="btn btn-primary" href="#trainees">Browse trainees</a>`}
         </div>
         <ol>
@@ -268,12 +289,17 @@ const indexHtml = head({
       </div>
     </div>
   </section>
-</main>` + foot('');
+</main>` + foot('', true);
 
 // ---------- Profile pages ----------
 const profile = (p, i) => {
   const root = '../../';
-  const others = people.filter(o => o.id !== p.id && o.track === p.track).slice(0, 6);
+  // Rotate through the track so every trainee is linked from somewhere.
+  const pool = people.filter(o => o.track === p.track);
+  const at = pool.indexOf(p);
+  const others = [...pool.slice(at + 1), ...pool.slice(0, at)].slice(0, 6);
+  const availability = p.placement ? `Now working: ${esc(p.status)}`
+    : p.employedSelfReported ? 'Employed and open to new opportunities' : 'Open to opportunities';
   const links = [
     p.links.github && `<a class="btn btn-soft btn-sm" href="${esc(p.links.github)}" target="_blank" rel="noopener">${icon.gh} GitHub</a>`,
     p.links.linkedin && `<a class="btn btn-soft btn-sm" href="${esc(p.links.linkedin)}" target="_blank" rel="noopener">LinkedIn ${icon.ext}</a>`,
@@ -292,14 +318,19 @@ const profile = (p, i) => {
     <div class="capstone">
       <h3>Capstone project coming soon</h3>
       <p>${esc(first(p.name))} presents a capstone project at Demo Day, 20 to 26 November 2026. The demo and source code will appear here once submitted.</p>
+      <p><a href="${root}#work">Until then, see the apps Cohort 1 built at the HPF x PLP Hackathon →</a></p>
     </div>`;
-  const contact = p.hideContact || !p.contact ? `<p class="fine">Contact details on request from the HPF team.</p>` : `
-      <div class="contact-list">
+  const introBtn = site.contactEmail
+    ? `<a class="btn btn-primary reveal" href="mailto:${esc(site.contactEmail)}?subject=${encodeURIComponent('Introduction to ' + p.name + ' (HPF Talent Hub)')}">${icon.mail}<span>Ask HPF to introduce you</span></a>` : '';
+  const contact = p.hideContact || !p.contact
+    ? `${introBtn ? `<div class="contact-list">${introBtn}</div>` : ''}<p class="fine">Contact details on request from the HPF team.</p>` : `
+      <div class="contact-list" data-first="${esc(first(p.name))}">
+        <button class="btn btn-primary reveal" type="button" data-kind="wa" data-v="${b64(p.contact.phone)}">${icon.wa}<span>Message on WhatsApp</span></button>
         <button class="btn btn-soft reveal" type="button" data-kind="email" data-v="${b64(p.contact.email)}">${icon.mail}<span>Show email</span></button>
-        <button class="btn btn-soft reveal" type="button" data-kind="wa" data-v="${b64(p.contact.phone)}">${icon.wa}<span>Show WhatsApp</span></button>
         <button class="btn btn-soft reveal" type="button" data-kind="phone" data-v="${b64(p.contact.phone)}">${icon.phone}<span>Show phone</span></button>
       </div>
-      <p class="fine">Please mention the HPF Talent Hub when you get in touch.</p>`;
+      <p class="fine">Your message will say you found ${esc(first(p.name))} on the HPF Talent Hub.</p>
+      <noscript><p class="fine">Turn on JavaScript to see ${esc(first(p.name))}'s contact details.</p></noscript>`;
 
   return head({
     title: `${p.name}, ${p.trackInfo.label} | HPF Talent Hub`,
@@ -316,28 +347,27 @@ const profile = (p, i) => {
     },
   }) + `
 <main id="main">
-  <div class="wrap crumbs"><a href="${root}#trainees">← All trainees</a></div>
+  <div class="wrap crumbs"><a href="${root}#trainees" id="back-link">← All trainees</a></div>
   <div class="wrap profile">
     <div class="profile-grid">
-      <aside class="profile-side">
+      <header class="profile-head">
+        <p class="eyebrow">${esc(site.programme)} · ${esc(site.cohort)}</p>
+        <h1>${esc(p.name)}</h1>
+        <div class="meta"><span class="track track-${p.track}">${esc(p.trackInfo.label)}</span></div>
+        <div class="placement${p.working ? '' : ' open'}">${availability}. Graduates ${esc(graduation.when)} 2026.</div>
+      </header>
+      <aside class="profile-side" aria-label="Contact and actions">
         <div class="portrait">${photoHtml(p, root, true)}</div>
         <div class="panel">
           <h2>Contact ${esc(first(p.name))}</h2>
           ${contact}
         </div>
-        <div class="panel" style="display:flex;gap:10px;flex-wrap:wrap">
+        <div class="panel actions">
           ${starBtn(p)}
           <button class="star" type="button" data-share>${icon.share}<span>Share profile</span></button>
         </div>
       </aside>
       <article class="profile-main">
-        <p class="eyebrow">${esc(site.programme)} · ${esc(site.cohort)}</p>
-        <h1>${esc(p.name)}</h1>
-        <div class="meta">
-          <span class="track track-${p.track}">${esc(p.trackInfo.label)}</span>
-          ${p.group ? `<span class="track" style="background:var(--paper);border:1px solid var(--line);color:var(--ink-2)">Hackathon group ${p.group}</span>` : ''}
-        </div>
-        ${p.placement ? `<div class="placement">Now working: ${esc(p.status)}</div>` : p.employedSelfReported ? `<div class="placement">Currently employed and open to new opportunities</div>` : ''}
 
         <section class="block" aria-labelledby="s-story">
           <h2 id="s-story">${esc(first(p.name))}'s story</h2>
@@ -365,7 +395,7 @@ const profile = (p, i) => {
 
         ${others.length ? `<section class="block" aria-labelledby="s-more">
           <h2 id="s-more">More ${esc(p.trackInfo.short)} trainees</h2>
-          <div class="more">${others.map(o => `<a href="${root}t/${o.id}/"><span class="av">${o.photo ? `<img src="${root}${o.photo}" alt="" loading="lazy">` : esc(o.initials)}</span>${esc(o.name)}</a>`).join('')}</div>
+          <div class="more">${others.map(o => `<a href="${root}t/${o.id}/"><span class="av">${o.photo ? `<img src="${root}${o.photo}" alt="" loading="lazy">` : esc(o.initials)}</span><span>${esc(o.name)}<small>${esc(o.status)}</small></span></a>`).join('')}</div>
         </section>` : ''}
       </article>
     </div>

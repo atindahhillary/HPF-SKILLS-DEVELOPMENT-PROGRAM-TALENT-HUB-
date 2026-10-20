@@ -9,7 +9,7 @@
     "a herd tracker that speaks Maa, Kiswahili and English.",
     "M-Pesa ticketing for visitors at Sekenani Gate.",
     "a savings app now piloting with real chamas.",
-    "four trainees already in paid work, before graduation."
+    "trainees already working as a teacher, an intern and freelance developers."
   ],
   "stats": [
     {
@@ -21,12 +21,13 @@
       "label": "specialist tracks: Full Stack and Data"
     },
     {
-      "value": "100%",
-      "label": "certified in graphic design"
+      "value": "26 Nov",
+      "label": "graduation day, ready for work"
     },
     {
       "value": "4",
-      "label": "trainee-built apps live today"
+      "label": "trainee-built apps live today",
+      "href": "#work"
     }
   ],
   "tracks": {
@@ -87,10 +88,10 @@
     },
     {
       "start": "2026-08-24",
-      "end": "2026-11-19",
-      "when": "24 Aug – 19 Nov",
-      "title": "Specialisation",
-      "text": "Each trainee chose Full Stack Web (MERN) or Data Analytics with Python."
+      "end": "2026-08-24",
+      "when": "From 24 Aug",
+      "title": "Specialisation begins",
+      "text": "Each trainee chose Full Stack Web (MERN) or Data Analytics with Python. Classes run to 19 November."
     },
     {
       "start": "2026-09-11",
@@ -108,7 +109,7 @@
     },
     {
       "start": "2026-11-20",
-      "end": "2026-11-25",
+      "end": "2026-11-26",
       "when": "20 – 26 Nov",
       "title": "Capstone and Demo Day",
       "text": "Each trainee presents a capstone project."
