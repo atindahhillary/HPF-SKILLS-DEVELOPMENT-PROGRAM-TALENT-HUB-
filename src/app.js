@@ -18,6 +18,18 @@
   const onScroll = () => top && top.classList.toggle('scrolled', scrollY > 8);
   addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
+  // Hero hook captions rotate every few seconds (static when reduced motion is on).
+  const hook = $('#hook');
+  const hooks = JSON.parse(document.getElementById('hooks-data')?.textContent || '[]');
+  if (hook && hooks.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let h = 0;
+    setInterval(() => {
+      if (document.hidden) return;
+      hook.classList.add('out');
+      setTimeout(() => { h = (h + 1) % hooks.length; hook.textContent = hooks[h]; hook.classList.remove('out'); }, 350);
+    }, 3800);
+  }
+
   // Timeline: mark past, current and upcoming milestones from today's date.
   const today = new Date().toISOString().slice(0, 10);
   let marked = false;

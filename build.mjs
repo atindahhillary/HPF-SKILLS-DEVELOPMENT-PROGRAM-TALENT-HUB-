@@ -50,7 +50,7 @@ people.forEach(p => p.skills.forEach(s => { skillCount[s] = (skillCount[s] || 0)
 const allSkills = Object.keys(skillCount).sort((a, b) => skillCount[b] - skillCount[a] || a.localeCompare(b));
 
 const photoHtml = (p, root, eager = false) => p.photo
-  ? `<img src="${root}${esc(p.photo)}" alt="Portrait of ${esc(p.name)}" width="640" height="800" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`
+  ? `<img src="${root}${esc(p.photo)}" alt="Portrait of ${esc(p.name)}" width="560" height="720" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`
   : `<div class="initials" role="img" aria-label="${esc(p.name)}">${esc(p.initials)}</div>`;
 
 const head = ({ title, desc, root, pathName, image, jsonld }) => `<!doctype html>
@@ -154,26 +154,27 @@ const indexHtml = head({
   jsonld: { '@context': 'https://schema.org', '@type': 'Organization', name: 'Human Practice Foundation Kenya', url: URL_BASE || undefined, logo: URL_BASE ? URL_BASE + '/assets/hpf-logo.svg' : undefined },
 }) + `
 <main id="main">
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div>
-          <p class="eyebrow">${esc(site.programme)} · ${esc(site.cohort)}</p>
-          <h1>Hire talent that already <span>builds for real needs.</span></h1>
-          <p class="lead">Meet ${people.length} young developers and data analysts from the Maasai Mara. See each person's story, skills and work since day one, then contact them directly.</p>
-          <div class="hero-cta">
-            <a class="btn btn-primary" href="#trainees">Meet the trainees</a>
-            <a class="btn btn-ghost" href="#work">See what they built</a>
-          </div>
-        </div>
-        <figure class="hero-media">
-          <img src="assets/img/winners-1.webp" alt="The Mara Smart Tracker team receiving their prize cheque at the HPF x PLP Hackathon" width="1600" height="911" fetchpriority="high">
-          <figcaption><b>Mara Smart Tracker team</b>2nd place, HPF x PLP Hackathon, 11 September 2026</figcaption>
-        </figure>
+  <section class="hero" aria-labelledby="hero-title">
+    <picture class="hero-bg">
+      <source media="(max-width: 720px)" srcset="assets/img/hero-cohort-m.webp" width="720" height="900">
+      <img src="assets/img/hero-cohort.webp" alt="" width="1800" height="569" fetchpriority="high">
+    </picture>
+    <div class="wrap hero-inner">
+      <p class="hero-kicker">${esc(site.programme)} · ${esc(site.cohort)}</p>
+      <h1 id="hero-title">Hire talent that already <span>builds for real needs.</span></h1>
+      <p class="hero-hook"><span class="hook-pre">From the Maasai Mara:</span> <span class="hook" id="hook" aria-hidden="true">${esc(site.hooks[0])}</span><span class="sr">${esc(site.hooks[0])}</span></p>
+      <p class="hero-lead">Meet ${people.length} young developers and data analysts. See each person's story, skills and work since day one, then contact them directly.</p>
+      <div class="hero-cta">
+        <a class="btn btn-light" href="#trainees">Meet the trainees</a>
+        <a class="btn btn-outline-light" href="#work">See what they built</a>
       </div>
-      <div class="stats">${site.stats.map(s => `<div class="stat"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join('')}</div>
     </div>
+    <p class="hero-credit">Cohort 1 with community and county partners, Narok West</p>
+    <script id="hooks-data" type="application/json">${JSON.stringify(site.hooks).replace(/</g, '\\u003c')}</script>
   </section>
+  <div class="wrap">
+    <div class="stats">${site.stats.map(s => `<div class="stat"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join('')}</div>
+  </div>
 
   <section class="dir" id="trainees">
     <div class="wrap">
@@ -219,9 +220,9 @@ const indexHtml = head({
         </article>`).join('')}
       </div>
       <div class="photo-strip">
-        <figure><img src="assets/img/demo.webp" alt="A trainee demonstrating a platform on screen at the hackathon" loading="lazy" width="1600" height="900"><figcaption>Hackathon demo day</figcaption></figure>
-        <figure><img src="assets/img/community-2.webp" alt="Parents, elders and local leaders watching the pitches" loading="lazy" width="1600" height="900"><figcaption>Parents and leaders watch the pitches</figcaption></figure>
-        <figure><img src="assets/img/pitch.webp" alt="A trainee pitching the Mara Supply Network project" loading="lazy" width="1600" height="900"><figcaption>Mara Supply Network pitch</figcaption></figure>
+        <figure><img src="assets/img/winners-1.webp" alt="The Mara Smart Tracker team holding their prize cheque at the HPF x PLP Hackathon" loading="lazy" width="1600" height="911"><figcaption><b>2nd place, with the cheque to prove it.</b> The Mara Smart Tracker team, 11 September 2026.</figcaption></figure>
+        <figure><img src="assets/img/demo.webp" alt="A trainee presenting a platform on screen at the hackathon" loading="lazy" width="1600" height="900"><figcaption><b>Every team pitched a working app.</b> Demo day at the hackathon.</figcaption></figure>
+        <figure><img src="assets/img/community-2.webp" alt="Parents, elders and local leaders watching the pitches" loading="lazy" width="1600" height="900"><figcaption><b>The whole community came to watch.</b> Parents, elders and leaders at Community Day.</figcaption></figure>
       </div>
     </div>
   </section>
