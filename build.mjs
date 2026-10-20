@@ -1,6 +1,7 @@
 // Static site generator for the HPF Talent Hub. No dependencies: `node build.mjs` -> dist/
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 
 const site = JSON.parse(fs.readFileSync('data/site.json', 'utf8'));
 const raw = JSON.parse(fs.readFileSync('data/trainees.json', 'utf8'));
@@ -14,6 +15,12 @@ if (!Object.keys(contacts).length) console.warn('Warning: no contacts found; pro
 const OUT = 'dist';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+// Assets are cached for 30 days, so URLs carry a content hash and change whenever the file does.
+const hashes = {};
+const v = file => {
+  hashes[file] ??= crypto.createHash('sha1').update(fs.readFileSync(file)).digest('hex').slice(0, 8);
+  return `${file}?v=${hashes[file]}`;
+};
 const b64 = s => Buffer.from(s, 'utf8').toString('base64');
 const initials = n => n.split(' ').filter(Boolean).map(w => w[0]).slice(0, 2).join('').toUpperCase();
 const first = n => n.split(' ')[0];
@@ -41,7 +48,7 @@ const people = raw.map(p => {
   const sentences = p.story.match(/[^.!?]+[.!?]+/g) || [];
   const excerpt = (/^my (success )?story/i.test(p.story) && sentences.length > 1 ? sentences.slice(1).join('') : p.story).trim()
     || `${first(p.name)} is training in ${track.label} with the HPF Skills Development Program.`;
-  return { ...p, contact: contacts[p.id], trackInfo: track, working, status, excerpt, initials: initials(p.name) };
+  return { ...p, photo: p.photo ? v(p.photo) : "", contact: contacts[p.id], trackInfo: track, working, status, excerpt, initials: initials(p.name) };
 }).sort((a, b) => Boolean(b.photo) - Boolean(a.photo) || a.name.localeCompare(b.name));
 
 // Skills sorted by how many trainees list them, for the filter.
@@ -71,7 +78,7 @@ ${URL_BASE ? `<meta property="og:url" content="${URL_BASE}${pathName}">\n<meta p
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap">
-<link rel="stylesheet" href="${root}style.css">
+<link rel="stylesheet" href="${root}style.css?v=${v('src/style.css').split('=')[1]}">
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, '\\u003c')}</script>` : ''}
 </head>
 <body>
@@ -117,7 +124,7 @@ const foot = root => `
   working: p.working, skills: p.skills,
   search: [p.name, p.trackInfo.label, p.status, p.interest, ...p.skills, p.story].join(' ').toLowerCase(),
 }))).replace(/</g, '\\u003c')}</script>
-<script src="${root}app.js" defer></script>
+<script src="${root}app.js?v=${v('src/app.js').split('=')[1]}" defer></script>
 </body>
 </html>`;
 
@@ -156,8 +163,8 @@ const indexHtml = head({
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
     <picture class="hero-bg">
-      <source media="(max-width: 720px)" srcset="assets/img/hero-cohort-m.webp" width="720" height="900">
-      <img src="assets/img/hero-cohort.webp" alt="" width="1800" height="569" fetchpriority="high">
+      <source media="(max-width: 720px)" srcset="${v('assets/img/hero-cohort-m.webp')}" width="720" height="900">
+      <img src="${v('assets/img/hero-cohort.webp')}" alt="" width="1800" height="569" fetchpriority="high">
     </picture>
     <div class="wrap hero-inner">
       <p class="hero-kicker">${esc(site.programme)} · ${esc(site.cohort)}</p>
@@ -220,9 +227,9 @@ const indexHtml = head({
         </article>`).join('')}
       </div>
       <div class="photo-strip">
-        <figure><img src="assets/img/winners-1.webp" alt="The Mara Smart Tracker team holding their prize cheque at the HPF x PLP Hackathon" loading="lazy" width="1600" height="911"><figcaption><b>2nd place, with the cheque to prove it.</b> The Mara Smart Tracker team, 11 September 2026.</figcaption></figure>
-        <figure><img src="assets/img/demo.webp" alt="A trainee presenting a platform on screen at the hackathon" loading="lazy" width="1600" height="900"><figcaption><b>Every team pitched a working app.</b> Demo day at the hackathon.</figcaption></figure>
-        <figure><img src="assets/img/community-2.webp" alt="Parents, elders and local leaders watching the pitches" loading="lazy" width="1600" height="900"><figcaption><b>The whole community came to watch.</b> Parents, elders and leaders at Community Day.</figcaption></figure>
+        <figure><img src="${v('assets/img/winners-1.webp')}" alt="The Mara Smart Tracker team holding their prize cheque at the HPF x PLP Hackathon" loading="lazy" width="1600" height="911"><figcaption><b>2nd place, with the cheque to prove it.</b> The Mara Smart Tracker team, 11 September 2026.</figcaption></figure>
+        <figure><img src="${v('assets/img/demo.webp')}" alt="A trainee presenting a platform on screen at the hackathon" loading="lazy" width="1600" height="900"><figcaption><b>Every team pitched a working app.</b> Demo day at the hackathon.</figcaption></figure>
+        <figure><img src="${v('assets/img/community-2.webp')}" alt="Parents, elders and local leaders watching the pitches" loading="lazy" width="1600" height="900"><figcaption><b>The whole community came to watch.</b> Parents, elders and leaders at Community Day.</figcaption></figure>
       </div>
     </div>
   </section>
