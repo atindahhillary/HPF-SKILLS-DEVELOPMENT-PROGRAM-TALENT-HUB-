@@ -19,6 +19,7 @@ const FACES = {
   // Supplied as a white circle on grey; fillCorners paints outside the circle white.
   'doris-koros': { cx: 0.53, cy: 0.37, fh: 0.30, fillCorners: true },
   'george-tipango': { cx: 0.50, cy: 0.37, fh: 0.26 },
+  'gloria-kisianan': { cx: 0.47, cy: 0.44, fh: 0.31 },
   'gloria-tago': { cx: 0.45, cy: 0.19, fh: 0.17 },
   'jane-eloto': { cx: 0.50, cy: 0.41, fh: 0.34 },
   'john-sanare-muli': { cx: 0.48, cy: 0.365, fh: 0.37 },
