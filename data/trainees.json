@@ -5,7 +5,7 @@
     "track": "data",
     "group": 5,
     "interest": "Data Analysis / Data Analytics",
-    "story": "Through the programme, I gained practical skills in [tools you learned, e.g. Excel, SQL, Power BI]. I completed [a project or milestone] and now feel confident analysing data and presenting insights. I'm now [applying for roles / working as ___ / building a portfolio] in data analysis",
+    "story": "",
     "quote": "",
     "instructorNote": "",
     "employedSelfReported": false,
@@ -14,10 +14,7 @@
       "Python",
       "Data cleaning",
       "Data analysis",
-      "Data presentation",
-      "Excel",
-      "SQL",
-      "Power BI"
+      "Data presentation"
     ],
     "links": {
       "github": "",
@@ -551,7 +548,7 @@
     "track": "data",
     "group": 2,
     "interest": "Data Analysis / Data Analytics",
-    "story": "Through the HPF ICT Academy,I have gained skills in digital marketing,graphic design and software engineering, where I learned to use different programming languages.I am currently learning both MERN stack development and data analytics,with my main focus on data analytics. The programme has opened doors to online freelance work and strengthened my determination to grow in the technology field.Despite challenges such as not having my own laptop, remain committed to learning, gaining experience and building a successful career in tech.",
+    "story": "Through the HPF ICT Academy, I have gained skills in digital marketing, graphic design and software engineering, where I learned to use different programming languages.I am currently learning both MERN stack development and data analytics, with my main focus on data analytics. The programme has opened doors to online freelance work and strengthened my determination to grow in the technology field.Despite challenges such as not having my own laptop, remain committed to learning, gaining experience and building a successful career in tech.",
     "quote": "Despite challenges such as not having my own laptop, I remain committed to learning and building a successful career in tech.",
     "instructorNote": "",
     "employedSelfReported": false,
@@ -667,9 +664,7 @@
       "React",
       "Node.js",
       "Git and GitHub",
-      "HTML",
-      "GitHub",
-      "Node"
+      "HTML"
     ],
     "links": {
       "github": "",

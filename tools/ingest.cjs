@@ -61,7 +61,8 @@ const people = rows.map((r, i) => {
   const id = slug(name);
   const email = clean(r[2]).toLowerCase();
   const grp = byEmail[email] || byEmail[clean(r[9]).toLowerCase()] || {};
-  const story = clean(r[7]);
+  // A story that still contains the form's [placeholder] prompts is treated as not submitted.
+  const story = /\[[^\]]*\]|\be\.g\./i.test(clean(r[7])) ? '' : clean(r[7]);
   const found = KEYWORDS.filter(k => new RegExp('\\b' + k.replace(/[.+]/g, '\\$&') + '\\b', 'i').test(story));
   const track = grp.track || (/data/i.test(r[6]) ? 'data' : 'mern');
   const skills = [...new Set([...TRACK_SKILLS[track], ...found])];

@@ -39,6 +39,8 @@ const icon = {
 
 // Normalise trainees for rendering.
 const people = raw.map(p => {
+  // Never publish a story that still holds the form's [placeholder] prompts.
+  if (/\[[^\]]*\]|\be\.g\./i.test(p.story)) { console.warn(`Unfilled story template for ${p.id}; hiding it.`); p = { ...p, story: '' }; }
   const track = site.tracks[p.track];
   const working = Boolean(p.placement) || p.employedSelfReported;
   const status = p.placement
@@ -47,7 +49,7 @@ const people = raw.map(p => {
   // Most stories open with "My success story is about...", so cards start from the second sentence.
   const sentences = p.story.match(/[^.!?]+[.!?]+/g) || [];
   const excerpt = (/^my (success )?story/i.test(p.story) && sentences.length > 1 ? sentences.slice(1).join('') : p.story).trim()
-    || `${first(p.name)} is training in ${track.label} with the HPF Skills Development Program.`;
+    || `${first(p.name)} is a ${track.label} trainee in the HPF Skills Development Program.`;
   return { ...p, photo: p.photo ? v(p.photo) : "", contact: contacts[p.id], trackInfo: track, working, status, excerpt, initials: initials(p.name) };
 }).sort((a, b) => Boolean(b.photo) - Boolean(a.photo) || a.name.localeCompare(b.name));
 
@@ -340,7 +342,7 @@ const profile = (p, i) => {
         <section class="block" aria-labelledby="s-story">
           <h2 id="s-story">${esc(first(p.name))}'s story</h2>
           ${p.quote ? `<blockquote>“${esc(p.quote)}”<cite>${esc(p.name)}</cite></blockquote>` : ''}
-          <p class="story">${esc(p.story || `${first(p.name)} is training in ${p.trackInfo.label} and will share their story here soon.`)}</p>
+          <p class="story">${esc(p.story || `${first(p.name)} is a ${p.trackInfo.label} trainee and will share their story here soon.`)}</p>
           ${p.instructorNote ? `<div class="note"><b>From the instructor</b><p>${esc(p.instructorNote)}</p></div>` : ''}
         </section>
 
