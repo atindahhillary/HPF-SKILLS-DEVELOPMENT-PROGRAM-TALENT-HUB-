@@ -64,6 +64,7 @@ people.forEach(p => {
   p.cardSkills = [...extra, ...p.skills.filter(s => !extra.includes(s))].slice(0, 3);
 });
 const graduation = site.timeline.find(t => /graduation/i.test(t.title));
+const gradDate = esc(graduation.when).replace(' ', '&nbsp;') + '&nbsp;2026';
 
 // Skills sorted by how many trainees list them, for the filter.
 const skillCount = {};
@@ -73,7 +74,7 @@ const allSkills = Object.keys(skillCount).sort((a, b) => skillCount[b] - skillCo
 // On cards the name sits right below the photo, so the image is decorative there.
 const photoHtml = (p, root, eager = false, decorative = false) => p.photo
   ? `<img src="${root}${esc(p.photo)}" alt="${decorative ? '' : `Portrait of ${esc(p.name)}`}" width="560" height="720" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`
-  : `<div class="initials" ${decorative ? 'aria-hidden="true"' : `role="img" aria-label="${esc(p.name)}"`}>${esc(p.initials)}</div>`;
+  : `<div class="initials initials-${p.track}" ${decorative ? 'aria-hidden="true"' : `role="img" aria-label="${esc(p.name)}"`}><span>${esc(p.initials)}</span></div>`;
 
 const head = ({ title, desc, root, pathName, image, jsonld }) => `<!doctype html>
 <html lang="en" class="no-js" data-root="${root}">
@@ -119,8 +120,9 @@ ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld).replace(
 const foot = (root, isIndex = false) => `
 <footer class="foot">
   <div class="wrap">
+    <a class="logo-tile" href="${root || './'}" aria-label="HPF Talent Hub home"><img src="${root}assets/hpf-logo.svg" alt="" width="90" height="33"></a>
     <div><span class="tagline">When skills meet the people who need them. That's human practice.</span><br>${esc(site.programme)} · ${esc(site.cohort)} · Delivered with Power Learn Project Africa</div>
-    <div>${site.contactEmail ? `Hiring or investing? <a href="mailto:${esc(site.contactEmail)}?subject=${encodeURIComponent('HPF Talent Hub enquiry')}">Email the HPF team</a><br>` : ''}© ${new Date().getFullYear()} Human Practice Foundation Kenya</div>
+    <div class="foot-legal">${site.contactEmail ? `Hiring or investing? <a href="mailto:${esc(site.contactEmail)}?subject=${encodeURIComponent('HPF Talent Hub enquiry')}">Email the HPF team</a><br>` : ''}© ${new Date().getFullYear()} Human Practice Foundation Kenya</div>
   </div>
 </footer>
 <div class="drawer" id="drawer" role="dialog" aria-modal="true" aria-labelledby="sl-title">
@@ -189,9 +191,9 @@ const indexHtml = head({
     <div class="wrap hero-inner">
       <p class="hero-kicker">${esc(site.programme)} · ${esc(site.cohort)}</p>
       <h1 id="hero-title">Hire talent that already <span>builds for real needs.</span></h1>
-      <p class="hero-hook"><span class="hook-pre">From the Maasai Mara:</span> <span class="hook" id="hook" aria-hidden="true">${esc(site.hooks[0])}</span><span class="sr">${site.hooks.map(esc).join(' ')}</span></p>
+      <p class="hero-hook"><span class="hook-line"><span class="hook-pre">From the Maasai Mara:</span> <span class="hook" id="hook" aria-hidden="true">${esc(site.hooks[0])}</span></span><span class="sr">${site.hooks.map(esc).join(' ')}</span></p>
       <button class="hook-toggle" type="button" id="hook-toggle" aria-label="Pause rotating highlights" hidden>Pause</button>
-      <p class="hero-lead">Meet ${people.length} young developers and data analysts graduating on ${esc(graduation.when)} 2026. See each person's story and skills, then contact them directly.</p>
+      <p class="hero-lead">Meet ${people.length} young developers and data analysts graduating on ${gradDate}. See each person's story and skills, then contact them directly.</p>
       <div class="hero-cta">
         <a class="btn btn-light" href="#trainees">Meet the trainees</a>
         <a class="btn btn-outline-light" href="#work">See what they built</a>
@@ -206,7 +208,7 @@ const indexHtml = head({
       : `<div class="stat"><b>${esc(s.value)}</b><span>${esc(s.label)}</span></div>`).join('')}</div>
   </div>
 
-  <section class="dir" id="trainees">
+  <section id="trainees">
     <div class="wrap">
       <div class="dir-head">
         <div>
@@ -235,7 +237,7 @@ const indexHtml = head({
     </div>
   </section>
 
-  <section id="work">
+  <section id="work" class="dir">
     <div class="wrap">
       <p class="eyebrow">Their work</p>
       <h2>Apps built by trainees, live today</h2>
@@ -257,7 +259,7 @@ const indexHtml = head({
     </div>
   </section>
 
-  <section id="journey" class="dir">
+  <section id="journey">
     <div class="wrap split">
       <div>
         <p class="eyebrow">The journey</p>
@@ -276,10 +278,13 @@ const indexHtml = head({
     <div class="wrap">
       <div class="band">
         <div>
-          <p class="eyebrow" style="color:var(--lav)">For recruiters and investors</p>
+          <p class="eyebrow">For recruiters and investors</p>
           <h2>Find your next hire in three steps</h2>
           <p>Capstone projects are presented at Demo Day, 20 to 26 November, and Cohort 1 graduates on 26 November 2026. Start a conversation now.</p>
-          ${site.contactEmail ? `<a class="btn btn-primary" href="mailto:${esc(site.contactEmail)}?subject=${encodeURIComponent('HPF Talent Hub enquiry')}">Talk to the HPF team</a>` : `<a class="btn btn-primary" href="#trainees">Browse trainees</a>`}
+          <div class="band-cta">
+            ${site.contactEmail ? `<a class="btn btn-primary" href="mailto:${esc(site.contactEmail)}?subject=${encodeURIComponent('HPF Talent Hub enquiry')}">Talk to the HPF team</a>` : `<a class="btn btn-primary" href="#trainees">Browse trainees</a>`}
+            <button class="btn btn-outline-light" type="button" data-open-shortlist aria-haspopup="dialog" aria-controls="drawer">${icon.list} Open your shortlist</button>
+          </div>
         </div>
         <ol>
           <li><span><b>Browse and filter</b> by track, skill or availability.</span></li>
@@ -354,7 +359,7 @@ const profile = (p, i) => {
         <p class="eyebrow">${esc(site.programme)} · ${esc(site.cohort)}</p>
         <h1>${esc(p.name)}</h1>
         <div class="meta"><span class="track track-${p.track}">${esc(p.trackInfo.label)}</span></div>
-        <div class="placement${p.working ? '' : ' open'}">${availability}. Graduates ${esc(graduation.when)} 2026.</div>
+        <div class="placement${p.working ? '' : ' open'}">${availability}. Graduates ${gradDate}.</div>
       </header>
       <aside class="profile-side" aria-label="Contact and actions">
         <div class="portrait">${photoHtml(p, root, true)}</div>
