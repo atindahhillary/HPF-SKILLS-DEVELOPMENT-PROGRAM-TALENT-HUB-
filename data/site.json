@@ -1,0 +1,62 @@
+{
+  "name": "HPF Talent Hub",
+  "programme": "HPF Skills Development Program",
+  "cohort": "Cohort 1, Narok West",
+  "contactEmail": "",
+  "stats": [
+    { "value": "20", "label": "trainees ready to meet you" },
+    { "value": "2", "label": "specialist tracks: Full Stack and Data" },
+    { "value": "100%", "label": "certified in graphic design" },
+    { "value": "4", "label": "trainee-built apps live today" }
+  ],
+  "tracks": {
+    "mern": {
+      "label": "Full Stack Web (MERN)",
+      "short": "Full Stack",
+      "blurb": "MongoDB, Express, React and Node, on top of Git and HTML foundations. Trainees build and run web apps end to end."
+    },
+    "data": {
+      "label": "Data Analytics with Python",
+      "short": "Data Analytics",
+      "blurb": "Python for data analysis, from foundations up. Trainees clean, analyse and present real data."
+    }
+  },
+  "solutions": [
+    {
+      "name": "Mama Salama",
+      "tag": "Maternal health",
+      "text": "Emergency transport, labour tracking and birth savings plans for expectant mothers around Aitong.",
+      "url": "https://aitong-mama-care.vercel.app",
+      "podium": 1
+    },
+    {
+      "name": "Mara Smart Herd Tracker",
+      "tag": "Livestock",
+      "text": "Tracks herds by GPS, warns herders when animals stray past a set boundary, and gives advice in Maa, Kiswahili and English.",
+      "url": "https://the-mara-smart-herd-tracker.vercel.app",
+      "podium": 2
+    },
+    {
+      "name": "Mara Park Fee System",
+      "tag": "Tourism",
+      "text": "Online booking, QR tickets and M-Pesa payments for visitors at Sekenani Gate, with a live revenue dashboard.",
+      "url": "https://park-fee-management-system-1.vercel.app",
+      "podium": 3
+    },
+    {
+      "name": "Chama Digital",
+      "tag": "Savings groups",
+      "text": "Lets a chama record savings, loans and repayments on a phone, and gives each member a credit score. In a pilot with the HPF Micro Enterprise Program.",
+      "url": "https://chama-digital-zeta.vercel.app"
+    }
+  ],
+  "timeline": [
+    { "start": "2026-04-30", "end": "2026-04-30", "when": "30 Apr", "title": "Certified in graphic design", "text": "Every trainee completed the Learnio course and earned a certificate." },
+    { "start": "2026-06-22", "end": "2026-08-23", "when": "Jun – Aug", "title": "Bootcamp and core skills", "text": "Digital foundations with Power Learn Project Africa, with work saved on GitHub." },
+    { "start": "2026-08-24", "end": "2026-11-19", "when": "24 Aug – 19 Nov", "title": "Specialisation", "text": "Each trainee chose Full Stack Web (MERN) or Data Analytics with Python." },
+    { "start": "2026-09-11", "end": "2026-09-11", "when": "11 Sep", "title": "HPF x PLP Hackathon", "text": "Teams pitched working apps to parents, leaders and partners at Community Day." },
+    { "start": "2026-10-22", "end": "2026-10-22", "when": "22 Oct", "title": "Microsoft certification exam", "text": "Trainees sit their Microsoft exam." },
+    { "start": "2026-11-20", "end": "2026-11-25", "when": "20 – 26 Nov", "title": "Capstone and Demo Day", "text": "Each trainee presents a capstone project." },
+    { "start": "2026-11-26", "end": "2026-11-26", "when": "26 Nov", "title": "Graduation", "text": "Cohort 1 graduates and is ready for work." }
+  ]
+}

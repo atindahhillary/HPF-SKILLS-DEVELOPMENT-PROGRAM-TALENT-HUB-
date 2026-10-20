@@ -1,0 +1,688 @@
+[
+  {
+    "id": "alice-kiok",
+    "name": "Alice Kiok",
+    "track": "data",
+    "group": 5,
+    "interest": "Data Analysis / Data Analytics",
+    "story": "Through the programme, I gained practical skills in [tools you learned, e.g. Excel, SQL, Power BI]. I completed [a project or milestone] and now feel confident analysing data and presenting insights. I'm now [applying for roles / working as ___ / building a portfolio] in data analysis",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "Python",
+      "Data cleaning",
+      "Data analysis",
+      "Data presentation",
+      "Excel",
+      "SQL",
+      "Power BI"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "",
+    "hideContact": false
+  },
+  {
+    "id": "beatrice-simaloi-ketere",
+    "name": "Beatrice Simaloi Ketere",
+    "track": "mern",
+    "group": 5,
+    "interest": "Software Engineering",
+    "story": "My success story is my journey in software engineering, where I continuously learn, improve my coding skills, and gain practical experience through projects. I am proud of my progress and determined to become a skilled software engineer who builds innovative solutions to real-world problems.",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Git and GitHub",
+      "HTML"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/beatrice-simaloi-ketere.webp",
+    "hideContact": false
+  },
+  {
+    "id": "doris-koros",
+    "name": "Doris Koros",
+    "track": "mern",
+    "group": 4,
+    "interest": "Software Engineering",
+    "story": "My success story is about my determination to learn and grow in the field of Software Engineering. Although I am still at the beginning of my journey, I am committed to gaining new skills, improving my knowledge, and working hard to achieve my goals. I believe that with dedication, patience, and continuous learning, I will become a skilled software engineer and use my knowledge to solve problems and make a positive impact in my community.",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Git and GitHub",
+      "HTML"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/doris-koros.webp",
+    "hideContact": false
+  },
+  {
+    "id": "faith-ketere",
+    "name": "Faith Ketere",
+    "track": "mern",
+    "group": 1,
+    "interest": "Software Engineering",
+    "story": "My success story is that I have started my journey in technology through ICT training, where I am learning programming, web development, and AI. Although I am still a beginner, I am committed to learning, building projects, and improving my skills every day. My dream is to become a skilled software engineer, use technology to solve real-life problems, and create opportunities for myself and my community. I believe that with hard work, consistency, and determination, I will achieve my goals",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Git and GitHub",
+      "HTML"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "",
+    "hideContact": false
+  },
+  {
+    "id": "felix-kimiri",
+    "name": "Felix Kimiri",
+    "track": "data",
+    "group": 3,
+    "interest": "Data Analysis / Data Analytics",
+    "story": "My journey with Power Learn Project has helped me grow in programming, data analytics, and problem-solving. Through practical projects like rainfall analysis, sales analysis, mobile money data cleaning, and student performance analysis, I have gained skills that I can apply to real-life challenges. The journey has not always been easy, but I have learned to be patient, keep practicing, and never give up. I am proud of my progress and look forward to using my skills to create opportunities for myself and make a positive impact in my community.",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "Python",
+      "Data cleaning",
+      "Data analysis",
+      "Data presentation",
+      "Problem-solving"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "",
+    "hideContact": false
+  },
+  {
+    "id": "george-tipango",
+    "name": "George Tipango",
+    "track": "data",
+    "group": 4,
+    "interest": "Data Analysis / Data Analytics",
+    "story": "My journey at the HPF ICT Hub has been a transformative experience. I started with basic computer skills and progressed through Graphic Design, Digital Marketing, AI Safari, Python Programming, Database Systems, Web Development, Software Engineering, and Data Analytics. Through practical training and projects, I have developed valuable technical, analytical, creative, and problem-solving skills. I have applied these skills in designing posters, assisting community members with professional CVs, and completing data analysis and software development projects. One of my greatest achievements is gaining the confidence to use technology to solve real-world problems. I have now chosen to specialize in Data Analytics, with the goal of building a professional career in the technology industry. Although I have not yet secured stable employment, HPF has equipped me with practical skills, confidence, and a strong foundation to pursue employment, freelancing, and entrepreneurship opportunities. I am grateful for the training, mentorship, and support that have helped me grow both personally and professionally.",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": {
+      "label": "ICT teacher",
+      "org": "Maasai Mara High School",
+      "kind": "job"
+    },
+    "skills": [
+      "Python",
+      "Data cleaning",
+      "Data analysis",
+      "Data presentation",
+      "Graphic design",
+      "Digital marketing",
+      "Problem-solving"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/george-tipango.webp",
+    "hideContact": false
+  },
+  {
+    "id": "gloria-kisianan",
+    "name": "Gloria Kisianan",
+    "track": "data",
+    "group": 2,
+    "interest": "Data Analysis / Data Analytics",
+    "story": "My journey as a learner at ICT Academy has been transformative. I have gained valuable ICT skills, improved my problem-solving abilities, and grown in confidence. Currently specializing in Data Analytics, I am excited to use data to solve real-world problems and create meaningful impact. I am grateful for this opportunity and look forward to growing professionally and achieving my career goals.",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": true,
+    "placement": null,
+    "skills": [
+      "Python",
+      "Data cleaning",
+      "Data analysis",
+      "Data presentation",
+      "Problem-solving"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "",
+    "hideContact": false
+  },
+  {
+    "id": "gloria-tago",
+    "name": "Gloria Tago",
+    "track": "data",
+    "group": 1,
+    "interest": "Data Analysis / Data Analytics",
+    "story": "My success story is about my journey with Power Learn Project (PLP), where I have gained valuable digital skills and confidence in technology. Through the assignments and practical projects, I have learned how to use Python, analyze data, work with Excel, use Google Colab, and upload my projects to GitHub.This journey has taught me patience, problem-solving, and the importance of never giving up. I am grateful to PLP for this opportunity, and I look forward to using my skills to solve real-world problems, grow my career, and create opportunities for myself and others.",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "Python",
+      "Data cleaning",
+      "Data analysis",
+      "Data presentation",
+      "Excel",
+      "Google Colab",
+      "GitHub",
+      "Problem-solving"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/gloria-tago.webp",
+    "hideContact": false
+  },
+  {
+    "id": "jane-eloto",
+    "name": "Jane Eloto",
+    "track": "mern",
+    "group": 1,
+    "interest": "Software Engineering",
+    "story": "Joining the HPF ICT Academy has been a great opportunity that has helped me grow both personally and professionally. Before joining the programme, I had basic computer knowledge, but I wanted to improve my digital skills and create better opportunities for my future. Through the training, I have gained valuable skills in graphic design, web development, Python programming, database management, and digital marketing. I have also worked on practical projects that have improved my creativity, problem-solving skills, confidence, and ability to use technology. One of my biggest achievements is being able to develop digital projects and understand how technology can solve real-life challenges in my community. Although I am still growing professionally, I am proud of the progress I have made. My goal is to become a skilled software developer, secure employment, and use my knowledge to create meaningful solutions that benefit my community. I am grateful to HPF and Power Learn Project for giving me the opportunity to learn and grow.",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Git and GitHub",
+      "HTML",
+      "Graphic design",
+      "Digital marketing",
+      "Python",
+      "Problem-solving"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/jane-eloto.webp",
+    "hideContact": false
+  },
+  {
+    "id": "john-sanare-muli",
+    "name": "John Sanare Muli",
+    "track": "mern",
+    "group": 2,
+    "interest": "Software Engineering",
+    "story": "My journey in Information Technology has been one of continuous learning, growth, and determination. Through my training at HPF ICT Academy, I have strengthened my digital skills and gained practical experience in areas such as web development, databases, and software project development. I have applied these skills to practical projects, including systems designed to address real challenges in my community. Despite the challenges of unemployment and limited opportunities, I remain committed to improving my technical skills, building my portfolio, and pursuing a career in the technology industry. This journey has taught me the importance of resilience, self-learning, and using technology to create meaningful solutions.",
+    "quote": "",
+    "instructorNote": "With a passion for development and solution driven approach. Sanare is more of a outgoing individual with an amazing vision.",
+    "employedSelfReported": false,
+    "placement": {
+      "label": "Freelance web developer",
+      "org": "",
+      "kind": "freelance"
+    },
+    "skills": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Git and GitHub",
+      "HTML"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/john-sanare-muli.webp",
+    "hideContact": false
+  },
+  {
+    "id": "kores-nampaso",
+    "name": "Kores Nampaso",
+    "track": "data",
+    "group": 4,
+    "interest": "Data Analysis / Data Analytics",
+    "story": "",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "Python",
+      "Data cleaning",
+      "Data analysis",
+      "Data presentation"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "",
+    "hideContact": false
+  },
+  {
+    "id": "maxwell-liaram",
+    "name": "Maxwell Liaram",
+    "track": "data",
+    "group": 5,
+    "interest": "Data Analysis / Data Analytics",
+    "story": "My success story is about my journey into the field of Data Analysis and Data Analytics. I have developed a strong interest in using data to solve problems, identify trends, and support better decision-making. Through my learning journey, I have been building my technical skills, improving my analytical thinking, and gaining knowledge of databases and data management. I am committed to continuous learning, gaining practical experience, and applying data analytics skills to real-world challenges. My goal is to become a skilled data analyst who uses data to create meaningful insights and contribute to organizational growth and development.",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "Python",
+      "Data cleaning",
+      "Data analysis",
+      "Data presentation"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/maxwell-liaram.webp",
+    "hideContact": false
+  },
+  {
+    "id": "nancy-ketere",
+    "name": "Nancy Ketere",
+    "track": "mern",
+    "group": 2,
+    "interest": "Graphic design",
+    "story": "My success story with the Power Learn Project’s Web Development course has been inspiring and transformative. I have gained valuable skills in HTML, CSS, JavaScript, and web design. Although I have a strong interest in graphic design, this course has expanded my knowledge of technology and creativity. It has helped me understand how design and coding work together to create attractive, user-friendly websites. I am now more confident and motivated to explore both fields and pursue exciting opportunities in the digital world.",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Git and GitHub",
+      "HTML",
+      "Graphic design",
+      "JavaScript"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "",
+    "hideContact": false
+  },
+  {
+    "id": "saiton-nampaso",
+    "name": "Saiton Nampaso",
+    "track": "mern",
+    "group": 5,
+    "interest": "Software Engineering",
+    "story": "The programme has helped me gain valuable tech skills, build confidence and prepare for career opportunities in the technology industry. I am now a little more confident in the tech world since it was a totally new concept to me. Looking forward to developing more skills in tech through the support of HPF and PLP.",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": true,
+    "placement": null,
+    "skills": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Git and GitHub",
+      "HTML"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/saiton-nampaso.webp",
+    "hideContact": false
+  },
+  {
+    "id": "sanau-sengeny",
+    "name": "Sanau Sengeny",
+    "track": "mern",
+    "group": 3,
+    "interest": "Software Engineering",
+    "story": "My success story is about growth, resilience, and determination. Coming from Aitong in the Maasai Mara, I have continued to pursue opportunities that can help me build a better future and make a positive impact in my community. After completing my Diploma in Human Resource Management, I joined ICT training, where I developed skills in web development, Python, data analytics, and digital marketing. One of my greatest achievements has been learning to build technology projects and present my ideas with confidence. The journey has not always been easy, but I have remained committed to learning, improving my skills, and exploring opportunities in technology. My goal is to become a skilled software developer, use technology to solve real life problems, and inspire other young people in my community to believe in their potential.",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Git and GitHub",
+      "HTML",
+      "Digital marketing",
+      "Python"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/sanau-sengeny.webp",
+    "hideContact": false
+  },
+  {
+    "id": "seema-letoluo",
+    "name": "Seema Letoluo",
+    "track": "mern",
+    "group": 3,
+    "interest": "Fullstack (MERN)",
+    "story": "My journey into the world of technology began at HPF ICT Academy Aitong, where I joined with a strong desire to gain digital skills and explore new opportunities for my future. At the beginning, I had limited knowledge of technology, but I was determined to learn, grow, and discover what I could achieve. Proud to be part of the Power Learn Project to learn and explore more on technology. My story is proof that when given a chance remain committed and willing to learn because one can transform their lives and inspire others to do the same",
+    "quote": "",
+    "instructorNote": "Silent, sharp and takes charge. She has shown in different instances that she is willing to learn and take the lead in activities scheduled within the class. She understands concepts easily and can follow instructions. Punctual in classess, asks questions for clarity and never shy's away from a challenge.",
+    "employedSelfReported": false,
+    "placement": {
+      "label": "Freelance web developer",
+      "org": "",
+      "kind": "freelance"
+    },
+    "skills": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Git and GitHub",
+      "HTML"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/seema-letoluo.webp",
+    "hideContact": false
+  },
+  {
+    "id": "seenoi-naurori",
+    "name": "Seenoi Naurori",
+    "track": "data",
+    "group": 2,
+    "interest": "Data Analysis / Data Analytics",
+    "story": "Through the HPF ICT Academy,I have gained skills in digital marketing,graphic design and software engineering, where I learned to use different programming languages.I am currently learning both MERN stack development and data analytics,with my main focus on data analytics. The programme has opened doors to online freelance work and strengthened my determination to grow in the technology field.Despite challenges such as not having my own laptop, remain committed to learning, gaining experience and building a successful career in tech.",
+    "quote": "Despite challenges such as not having my own laptop, I remain committed to learning and building a successful career in tech.",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "Python",
+      "Data cleaning",
+      "Data analysis",
+      "Data presentation",
+      "Graphic design",
+      "Digital marketing"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/seenoi-naurori.webp",
+    "hideContact": false
+  },
+  {
+    "id": "sharon-koina",
+    "name": "Sharon Koina",
+    "track": "data",
+    "group": 3,
+    "interest": "Data Analysis / Data Analytics",
+    "story": "My journey with HPF and the Power Learn Project has helped me grow my digital and technical skills. Through my training, I have gained experience in Python programming, data analytics, problem-solving, and software development. I have worked on practical projects involving data cleaning, sales analysis, and data visualization, which have helped me apply what I learn to real-world problems. I have also developed skills in graphic design and digital marketing. Although I am still learning and building my portfolio, I am proud of my progress and the projects I have completed. My goal is to continue improving my skills, gain practical work experience, and secure an opportunity in the technology field where I can contribute and keep growing.",
+    "quote": "",
+    "instructorNote": "Sharon is a dedicated student, considering her top in the class. She handles her studies with remarkable discipline. She shows passion in what she does, and being in Data, has driven her into driving change in how people and I think when it comes to analysing data.",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "Python",
+      "Data cleaning",
+      "Data analysis",
+      "Data presentation",
+      "Graphic design",
+      "Digital marketing",
+      "Data visualization",
+      "Problem-solving"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/sharon-koina.webp",
+    "hideContact": false
+  },
+  {
+    "id": "solomon-munke-njapit",
+    "name": "Solomon Munke Njapit",
+    "track": "mern",
+    "group": 1,
+    "interest": "Software Engineering",
+    "story": "Before joining the engineering class was not able to create any website but now i have a working booking website that i created by myself and its currently working",
+    "quote": "",
+    "instructorNote": "",
+    "employedSelfReported": true,
+    "placement": {
+      "label": "Graphic design intern",
+      "org": "The Maa Trust",
+      "kind": "internship"
+    },
+    "skills": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Git and GitHub",
+      "HTML"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "",
+    "hideContact": false
+  },
+  {
+    "id": "stacy-sakat",
+    "name": "Stacy Sakat",
+    "track": "mern",
+    "group": 4,
+    "interest": "Software Engineering",
+    "story": "My journey with HPF has helped me develop my skills in MERN Full-Stack Development, including MongoDB, Express.js, React, and Node.js. I have gained practical experience in building web applications, solving problems, and using GitHub. This journey has strengthened my confidence and inspired me to pursue a career in software engineering.",
+    "quote": "I have gained practical experience in building web applications, solving problems, and using GitHub.",
+    "instructorNote": "",
+    "employedSelfReported": false,
+    "placement": null,
+    "skills": [
+      "MongoDB",
+      "Express.js",
+      "React",
+      "Node.js",
+      "Git and GitHub",
+      "HTML",
+      "GitHub",
+      "Node"
+    ],
+    "links": {
+      "github": "",
+      "linkedin": "",
+      "portfolio": ""
+    },
+    "capstone": {
+      "title": "",
+      "summary": "",
+      "repo": "",
+      "demo": ""
+    },
+    "photo": "assets/photos/stacy-sakat.webp",
+    "hideContact": false
+  }
+]
